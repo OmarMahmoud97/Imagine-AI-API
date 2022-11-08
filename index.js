@@ -6,7 +6,7 @@ const cors = require("cors");
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 app.use(express.json());
-deepai.setApiKey(process.env.DEEP_AI_API_KEY);
+deepai.setApiKey("d4e4b786-469a-4c43-9d5f-06ea67b0f221");
 // app.options("*", cors());
 app.post("/image", (req, res) => {
   if (!req.body.user_prompt) {
