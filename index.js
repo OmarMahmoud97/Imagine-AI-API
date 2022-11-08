@@ -16,23 +16,27 @@ deepai.setApiKey("d4e4b786-469a-4c43-9d5f-06ea67b0f221");
 // };
 
 // app.options("*", cors());
-app.post("/image", async (req, res) => {
+app.post("/image", (req, res) => {
   console.log("HELLO", req.body.user_prompt);
   if (!req.body.user_prompt) {
     return res.status(400).json({
       message: "you must provide a prompt",
     });
   }
-  try {
-    const response = await deepai.callStandardApi("text2img", {
+  // try {
+  deepai
+    .callStandardApi("text2img", {
       text: req.body.user_prompt,
+    })
+    .then((response) => {
+      console.log(response);
+      res.json(response);
     });
-    console.log(response);
-    res.json(response);
-  } catch (err) {
-    console.log(err);
-    res.json({ err });
-  }
+
+  // } catch (err) {
+  console.log(err);
+  res.json({ err });
+  // }
 });
 
 app.listen(process.env.PORT, () => {
