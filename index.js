@@ -8,11 +8,11 @@ app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
 deepai.setApiKey("d4e4b786-469a-4c43-9d5f-06ea67b0f221");
 
-const callApi = async (prompt) => {
-  return await deepai.callStandardApi("text2img", {
-    prompt,
-  });
-};
+// const callApi = async (prompt) => {
+//   return await deepai.callStandardApi("text2img", {
+//     prompt,
+//   });
+// };
 
 // app.options("*", cors());
 app.post("/image", async (req, res) => {
@@ -22,7 +22,9 @@ app.post("/image", async (req, res) => {
     });
   }
   try {
-    const response = await callApi(req.body.user_prompt);
+    const response = await deepai.callStandardApi("text2img", {
+      text: req.body.user_prompt,
+    });
     res.json(response);
   } catch (err) {
     console.log(err);
