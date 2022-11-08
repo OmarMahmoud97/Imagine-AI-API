@@ -9,7 +9,7 @@ app.use(express.json());
 deepai.setApiKey("d4e4b786-469a-4c43-9d5f-06ea67b0f221");
 
 const callApi = async (prompt) => {
-  const resp = await deepai.callStandardApi("text2img", {
+  return await deepai.callStandardApi("text2img", {
     prompt,
   });
 };
@@ -20,11 +20,10 @@ app.post("/image", async (req, res) => {
     return res.status(400).json({
       message: "you must provide a prompt",
     });
-
-    return res.json({ resp });
   }
   try {
-    await callApi(req.body.user_prompt);
+    const response = await callApi(req.body.user_prompt);
+    res.json(response);
   } catch (err) {
     console.log(err);
     res.json({ err });
