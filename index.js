@@ -26,7 +26,7 @@ app.post("/image", async (req, res) => {
     const response = await deepai.callStandardApi("text2img", {
       text: req.body.user_prompt,
     });
-    res.json(response);
+    res.json({ response });
   } catch (err) {
     console.log(err);
     res.json({ err });
