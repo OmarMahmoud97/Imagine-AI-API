@@ -7,23 +7,24 @@ app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 app.use(express.json());
 deepai.setApiKey("d4e4b786-469a-4c43-9d5f-06ea67b0f221");
+
+const callApi = async (prompt) => {
+  const resp = await deepai.callStandardApi("text2img", {
+    prompt,
+  });
+};
+
 // app.options("*", cors());
-app.post("/image", (req, res) => {
+app.post("/image", async (req, res) => {
   if (!req.body.user_prompt) {
     return res.status(400).json({
       message: "you must provide a prompt",
     });
-  }
-
-  const callApi = async () => {
-    const resp = await deepai.callStandardApi("text2img", {
-      text: req.body.user_prompt,
-    });
 
     return res.json({ resp });
-  };
+  }
   try {
-    callApi();
+    await callApi(req.body.user_prompt);
   } catch (err) {
     console.log(err);
     res.json({ err });
