@@ -7,7 +7,7 @@ const deepai = require("deepai");
 const cors = require("cors");
 app.use(cors());
 
-deepai.setApiKey("d4e4b786-469a-4c43-9d5f-06ea67b0f221");
+deepai.setApiKey(process.env.DEEP_AI_API_KEY);
 
 // const callApi = async (prompt) => {
 //   return await deepai.callStandardApi("text2img", {
