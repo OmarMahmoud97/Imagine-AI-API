@@ -31,11 +31,14 @@ app.post("/image", (req, res) => {
     .then((response) => {
       console.log(response);
       res.json(response);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({ err });
     });
 
   // } catch (err) {
-  console.log(err);
-  res.json({ err });
+
   // }
 });
 
