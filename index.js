@@ -1,11 +1,12 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+app.use(express.json());
+
 const deepai = require("deepai");
 const cors = require("cors");
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
-app.use(express.json());
 deepai.setApiKey("d4e4b786-469a-4c43-9d5f-06ea67b0f221");
 
 // const callApi = async (prompt) => {
@@ -23,6 +24,8 @@ app.post("/image", async (req, res) => {
     });
   }
   try {
+    console.log(deepai);
+
     const response = await deepai.callStandardApi("text2img", {
       text: String(req.body.user_prompt),
     });
