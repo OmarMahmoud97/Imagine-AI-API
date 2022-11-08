@@ -35,8 +35,11 @@ app.post("/image", (req, res) => {
 
     res.json(resp);
   };
-
-  callApi();
+  try {
+    callApi();
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.listen(process.env.PORT, () => {
