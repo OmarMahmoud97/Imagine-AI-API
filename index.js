@@ -7,7 +7,7 @@ app.use(cors());
 
 app.use(express.json());
 deepai.setApiKey(process.env.DEEP_AI_API_KEY);
-
+app.options("*", cors());
 app.post("/image", (req, res) => {
   if (!req.body.user_prompt) {
     return res.status(400).json({
