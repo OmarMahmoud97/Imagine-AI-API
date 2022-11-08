@@ -20,13 +20,13 @@ app.post("/image", (req, res) => {
       text: req.body.user_prompt,
     });
 
-    return res.json(resp);
+    return res.json({ resp });
   };
   try {
     callApi();
   } catch (err) {
     console.log(err);
-    res.json(err);
+    res.json({ err });
   }
 });
 
